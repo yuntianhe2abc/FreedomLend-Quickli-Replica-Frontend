@@ -1,31 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import SingleApplicant from "./componnets/SingleApplicant/SingleApplicant";
-const styles = (theme) => ({
-  textField: {
-    width: "90%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingBottom: "20px",
-    marginTop: 0,
-    fontWeight: 500,
-  },
-  input: {
-    color: "white",
-  },
-});
+import ApplicantList from "./componnets/ApplicantList";
 const Applicants = () => {
+  const [numOfApplicants, setNumOfApplicants] = useState(1);
   return (
     <div>
       <TextField
         id="filled-number"
         label="Number of Applicant"
-        className={styles.textField}
-        inputProps={{ type: "number", min: 1, max: 4 }}
+        type="number"
+        inputProps={{ min: 1, max: 4 }}
         variant="outlined"
         sx={{ m: "32px", minWidth: "300px" }}
+        onChange={(e) => {
+          console.log(e.target.value);
+          setNumOfApplicants(e.target.value);
+        }}
       />
-      <SingleApplicant />
+      <ApplicantList numOfApplicants={numOfApplicants} />
     </div>
   );
 };

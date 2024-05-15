@@ -1,10 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
-import Applicants from './componnets/applicants/applicants';
+import Applicants from "./componnets/applicants/applicants";
 function App() {
-  return (
-    <Applicants />
-  );
+  return <Applicants />;
 }
 
 export default App;
