@@ -1,19 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
+import { RootState } from "../store";
+import {
+  ApplicantInterface,
+  LoanInterface,
+} from "@/utils/interfaces/formInterfaces";
+const MAX_APPLICANTS = 2;
+const MAX_COMMITMENTS = 4;
 
-export interface ApplicantInterface {
-  id: string;
-  annualBaseIncome: string;
-  annualNonBaseIncome: string;
-  annualBonusIncome: string;
-  monthlyLivingExpenses: string;
-  monthlyOtherExpenses: string;
-  childSupport: string;
-  monthlyRent: string;
-  index?: number;
-}
 interface FormInterface {
   applicants: ApplicantInterface[];
+  loans: LoanInterface[];
 }
 const initialApplicantData: ApplicantInterface = {
   id: uuidv4(),
@@ -25,13 +22,23 @@ const initialApplicantData: ApplicantInterface = {
   childSupport: "",
   monthlyRent: "",
 };
-const initialState: FormInterface = { applicants: [initialApplicantData] };
+const initialLoan: LoanInterface = {
+  id: uuidv4(),
+  loanAmount: "",
+  lendingInterestRate: "",
+  commitmentTerm: "",
+  interestOnlyTerm: "",
+};
+const initialState: FormInterface = {
+  applicants: [initialApplicantData],
+  loans: [initialLoan],
+};
 export const formSlice = createSlice({
   name: "form",
   initialState,
   reducers: {
     addApplicant: (state) => {
-      if (state.applicants.length < 3) {
+      if (state.applicants.length < MAX_APPLICANTS) {
         const newApplicant = { ...initialApplicantData, id: uuidv4() };
         const newApplicants = [...state.applicants, newApplicant];
         state.applicants = newApplicants;
@@ -53,13 +60,33 @@ export const formSlice = createSlice({
       const newApplicant = { ...oldApplicant, newAttributes };
       state.applicants[oldApplicantIndex] = newApplicant;
     },
+    addLoan: (state) => {
+      if (state.loans.length < MAX_COMMITMENTS) {
+        const newLoan = { ...initialLoan, id: uuidv4() };
+        const newLoans = [...state.loans, newLoan];
+        state.loans = newLoans;
+      }
+    },
+    deleteLoan: (state, action) => {
+      const { loanId } = action.payload;
+      console.log(action.payload);
+      const filteredLoans = state.loans.filter((loan) => loan.id !== loanId);
+      state.loans = filteredLoans;
+    },
   },
 });
-
+export const getApplicantsNumber = (state: RootState) => {
+  return state.form.applicants.length;
+};
+export const getLoansNumber = (state: RootState) => {
+  return state.form.loans.length;
+};
 // Action creators are generated for each case reducer function
 export const {
   addApplicant,
   deleteApplicant,
   updateApplicant,
+  addLoan,
+  deleteLoan,
 } = formSlice.actions;
 export default formSlice.reducer;

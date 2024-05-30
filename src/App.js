@@ -1,7 +1,6 @@
-import Applicants from "./components/Applicants/Applicants";
 import "./App.css";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-
+import Homepage from "./components/Homepage";
 const theme = createTheme({
   palette: {
     primary: {
@@ -18,7 +17,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Applicants />
+      <Homepage />
     </ThemeProvider>
   );
 }

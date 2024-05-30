@@ -1,71 +1,53 @@
 import React from "react";
 import TextFieldGroup from "@/layout/TextFieldGroup";
-import { SxPropsStyles } from "@/theme/globalStyle.js";
-import { ApplicantInterface } from "@/store/slices/formSlice";
+import { ApplicantInterface } from "@/utils/interfaces/formInterfaces";
 import { Box, IconButton, Typography } from "@mui/material";
-import FieldInterface from "@/type/FieldInterface";
+import FieldInterface from "@/utils/interfaces/FieldInterface";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useDispatch } from "react-redux";
-import { deleteApplicant } from "@/store/slices/formSlice";
-
-const styles: SxPropsStyles = {
-  container: {
-    minWidth: "170px",
-    width: "170px",
-  },
-  header: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  textFieldGroups: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "24px",
-  },
-};
+import { useDispatch, useSelector } from "react-redux";
+import { deleteApplicant, getApplicantsNumber } from "@/store/slices/formSlice";
+import { singleInstanceStyles as styles } from "@/styles/singleInstanceStyle";
 
 const incomeFields: FieldInterface[] = [
   {
     id: "annualBaseIncome",
     label: "Base Income",
     variant: "outlined",
-    type: "number",
+    type: "money",
   },
   {
     id: "annualNonBaseIncome",
     label: "Non-base Income",
     variant: "outlined",
-    type: "number",
+    type: "money",
   },
   {
     id: "annualBonusIncome",
     label: "Bonus",
     variant: "outlined",
-    type: "number",
+    type: "money",
   },
 ];
 const expenseFields: FieldInterface[] = [
   {
     id: "monthlyLivingExpenses",
     label: "Basic Expense",
-    type: "number",
+    type: "money",
   },
   {
     id: "monthlyOtherExpenses",
     label: "Other expenses",
-    type: "number",
+    type: "money",
   },
   {
     id: "childSupport",
     label: "Child support",
-    type: "number",
+    type: "money",
   },
   {
     id: "monthlyRent",
     label: "Rent",
-    type: "number",
+    type: "money",
   },
 ];
 const SingleApplicant = ({
@@ -76,7 +58,7 @@ const SingleApplicant = ({
   index: number;
 }) => {
   const dispatch = useDispatch();
-
+  const numberOfApplicants = useSelector(getApplicantsNumber);
   const handleDelete = () => {
     dispatch(deleteApplicant({ applicantId: applicant.id }));
   };
@@ -84,9 +66,11 @@ const SingleApplicant = ({
     <Box sx={styles.container}>
       <Box sx={styles.header}>
         <Typography variant="h6">Applicant {index + 1}</Typography>
-        <IconButton onClick={handleDelete}>
-          <ClearIcon />
-        </IconButton>
+        {numberOfApplicants > 1 && (
+          <IconButton sx={{ height: "32px" }} onClick={handleDelete}>
+            <ClearIcon />
+          </IconButton>
+        )}
       </Box>
       <Box sx={styles.textFieldGroups}>
         <TextFieldGroup fields={incomeFields} />
