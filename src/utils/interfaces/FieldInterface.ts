@@ -1,4 +1,4 @@
-export type inputType = "money" | "number";
+export type inputType = "amount" | "quantity" | "rate";
 export default interface FieldInterface {
   id: string;
   label: string;

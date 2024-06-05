@@ -9,6 +9,7 @@ const containerStyles: SxPropsStyles = {
     gap: "16px",
     maxWidth: "100%",
     overflowX: "auto",
+    minHeight: "250px",
   },
 };
 const InstanceListContainer = ({ children }: { children: ReactNode }) => {

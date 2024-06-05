@@ -5,7 +5,6 @@ import LabelContainer from "@/layout/LabelContainer";
 import InstanceListContainer from "@/layout/InstanceListContainer";
 import Loan from "@/components/Loans/Loan";
 import SectionBodyContainer from "@/layout/SectionBodyContainer/SectionBodyContainer";
-const commitsLables = ["", ""];
 const loansLabels = [
   "",
   "Loan amount",

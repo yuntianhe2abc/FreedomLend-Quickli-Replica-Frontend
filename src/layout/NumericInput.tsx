@@ -2,35 +2,14 @@ import * as React from "react";
 import { NumericFormat, NumericFormatProps } from "react-number-format";
 import TextField from "@mui/material/TextField";
 import FieldInterface, { inputType } from "@/utils/interfaces/FieldInterface";
+import InputAdornment from "@mui/material/InputAdornment";
 
 interface CustomProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
   name: string;
 }
-const NumericFormatMoney = React.forwardRef<NumericFormatProps, CustomProps>(
-  function NumericFormatCustom(props, ref) {
-    const { onChange, ...other } = props;
 
-    return (
-      <NumericFormat
-        {...other}
-        getInputRef={ref}
-        onValueChange={(values) => {
-          onChange({
-            target: {
-              name: props.name,
-              value: values.value,
-            },
-          });
-        }}
-        thousandSeparator
-        valueIsNumericString
-        prefix="$"
-      />
-    );
-  }
-);
-const NumericFormatNumber = React.forwardRef<NumericFormatProps, CustomProps>(
+const AmountFormat = React.forwardRef<NumericFormatProps, CustomProps>(
   function NumericFormatCustom(props, ref) {
     const { onChange, ...other } = props;
 
@@ -52,13 +31,14 @@ const NumericFormatNumber = React.forwardRef<NumericFormatProps, CustomProps>(
     );
   }
 );
+
 const NumericrInput = ({ field }: { field: FieldInterface }) => {
   const [value, setValue] = React.useState("");
   const { id, label, type } = field;
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
-  if (type === "money") {
+  if (type === "amount") {
     return (
       <TextField
         label={label}
@@ -68,12 +48,15 @@ const NumericrInput = ({ field }: { field: FieldInterface }) => {
         id={id}
         size="small"
         InputProps={{
-          inputComponent: NumericFormatMoney as any,
+          inputComponent: AmountFormat as any,
+          inputProps: { maxLength: 10 },
+          startAdornment: <InputAdornment position="start">$</InputAdornment>,
         }}
+        sx={{ width: "100%" }}
         variant="standard"
       />
     );
-  } else if (type === "number") {
+  } else if (type === "rate") {
     return (
       <TextField
         label={label}
@@ -83,7 +66,25 @@ const NumericrInput = ({ field }: { field: FieldInterface }) => {
         id={id}
         size="small"
         InputProps={{
-          inputComponent: NumericFormatNumber as any,
+          inputProps: { maxLength: 6 },
+          endAdornment: <InputAdornment position="start">%</InputAdornment>,
+        }}
+        sx={{ width: "100%" }}
+        variant="standard"
+      />
+    );
+  } else {
+    return (
+      <TextField
+        label={label}
+        value={value}
+        onChange={handleChange}
+        name="numberformat"
+        id={id}
+        size="small"
+        sx={{ width: "100%" }}
+        InputProps={{
+          inputProps: { maxLength: 2 },
         }}
         variant="standard"
       />

@@ -31,23 +31,23 @@ const Loan = ({ loan, index }: { loan: LoanInterface; index: number }) => {
 const loansFields: FieldInterface[] = [
   {
     id: "loanAmount",
-    label: "Loan amount:",
-    type: "money",
+    label: "Amount",
+    type: "amount",
   },
   {
     id: "lendingInterestRate",
-    label: "Lending interest rate (%):",
-    type: "number",
+    label: "Interest rate",
+    type: "rate",
   },
   {
     id: "commitmentTerm",
-    label: "Term (years):",
-    type: "number",
+    label: "Term",
+    type: "quantity",
   },
   {
     id: "interestOnlyTerm",
-    label: "Interest only terms (years):",
-    type: "number",
+    label: "Interest only term",
+    type: "quantity",
   },
 ];
 export default Loan;

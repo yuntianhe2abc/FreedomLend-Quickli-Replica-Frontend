@@ -2,8 +2,8 @@ import { SxPropsStyles } from "@/theme/globalStyle.js";
 
 export const singleInstanceStyles: SxPropsStyles = {
   container: {
-    minWidth: "170px",
-    width: "170px",
+    minWidth: "220px",
+    width: "220px",
   },
   header: {
     display: "flex",

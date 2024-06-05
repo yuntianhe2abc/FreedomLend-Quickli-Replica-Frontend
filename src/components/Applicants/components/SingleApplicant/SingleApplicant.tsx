@@ -13,41 +13,41 @@ const incomeFields: FieldInterface[] = [
     id: "annualBaseIncome",
     label: "Base Income",
     variant: "outlined",
-    type: "money",
+    type: "amount",
   },
   {
     id: "annualNonBaseIncome",
     label: "Non-base Income",
     variant: "outlined",
-    type: "money",
+    type: "amount",
   },
   {
     id: "annualBonusIncome",
     label: "Bonus",
     variant: "outlined",
-    type: "money",
+    type: "amount",
   },
 ];
 const expenseFields: FieldInterface[] = [
   {
     id: "monthlyLivingExpenses",
     label: "Basic Expense",
-    type: "money",
+    type: "amount",
   },
   {
     id: "monthlyOtherExpenses",
     label: "Other expenses",
-    type: "money",
+    type: "amount",
   },
   {
     id: "childSupport",
     label: "Child support",
-    type: "money",
+    type: "amount",
   },
   {
     id: "monthlyRent",
     label: "Rent",
-    type: "money",
+    type: "amount",
   },
 ];
 const SingleApplicant = ({
