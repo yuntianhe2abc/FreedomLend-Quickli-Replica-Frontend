@@ -1,14 +1,14 @@
 import React from "react";
-import { LoanInterface } from "@/utils/interfaces/formInterfaces";
+import { ILoanInterface } from "@/utils/interfaces/formInterfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteLoan, getLoansNumber } from "@/store/slices/formSlice";
 import { Box, IconButton, Typography } from "@mui/material";
-import FieldInterface from "@/utils/interfaces/FieldInterface";
+import { loansFields } from "@/utils/interfaces/FieldInterface";
 import ClearIcon from "@mui/icons-material/Clear";
 import { singleInstanceStyles as styles } from "@/styles/singleInstanceStyle";
 import TextFieldGroup from "@/layout/TextFieldGroup";
 
-const Loan = ({ loan, index }: { loan: LoanInterface; index: number }) => {
+const Loan = ({ loan, index }: { loan: ILoanInterface; index: number }) => {
   const dispatch = useDispatch();
   const numberOfLoans = useSelector(getLoansNumber);
   const handleDelete = () => {
@@ -28,26 +28,5 @@ const Loan = ({ loan, index }: { loan: LoanInterface; index: number }) => {
     </Box>
   );
 };
-const loansFields: FieldInterface[] = [
-  {
-    id: "loanAmount",
-    label: "Amount",
-    type: "amount",
-  },
-  {
-    id: "lendingInterestRate",
-    label: "Interest rate",
-    type: "rate",
-  },
-  {
-    id: "commitmentTerm",
-    label: "Term",
-    type: "quantity",
-  },
-  {
-    id: "interestOnlyTerm",
-    label: "Interest only term",
-    type: "quantity",
-  },
-];
+
 export default Loan;

@@ -1,1 +1,1 @@
-export { default } from "./NonShareableCommitment";
+export { default } from "./NonShareableCommitments";

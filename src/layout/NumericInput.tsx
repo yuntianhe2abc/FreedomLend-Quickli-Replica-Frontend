@@ -3,7 +3,7 @@ import { NumericFormat, NumericFormatProps } from "react-number-format";
 import TextField from "@mui/material/TextField";
 import FieldInterface, { inputType } from "@/utils/interfaces/FieldInterface";
 import InputAdornment from "@mui/material/InputAdornment";
-
+import { BootstrapInput } from "@/components/NonShareableCommitment/components/CommitmentType/CommitmentTypeSelectInput";
 interface CustomProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
   name: string;
@@ -84,7 +84,7 @@ const NumericrInput = ({ field }: { field: FieldInterface }) => {
         size="small"
         sx={{ width: "100%" }}
         InputProps={{
-          inputProps: { maxLength: 2 },
+          inputProps: { maxLength: 3 },
         }}
         variant="standard"
       />

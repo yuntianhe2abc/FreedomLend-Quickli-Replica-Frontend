@@ -1,60 +1,17 @@
 import React from "react";
 import TextFieldGroup from "@/layout/TextFieldGroup";
-import { ApplicantInterface } from "@/utils/interfaces/formInterfaces";
+import { IApplicantInterface } from "@/utils/interfaces/formInterfaces";
 import { Box, IconButton, Typography } from "@mui/material";
-import FieldInterface from "@/utils/interfaces/FieldInterface";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteApplicant, getApplicantsNumber } from "@/store/slices/formSlice";
 import { singleInstanceStyles as styles } from "@/styles/singleInstanceStyle";
-
-const incomeFields: FieldInterface[] = [
-  {
-    id: "annualBaseIncome",
-    label: "Base Income",
-    variant: "outlined",
-    type: "amount",
-  },
-  {
-    id: "annualNonBaseIncome",
-    label: "Non-base Income",
-    variant: "outlined",
-    type: "amount",
-  },
-  {
-    id: "annualBonusIncome",
-    label: "Bonus",
-    variant: "outlined",
-    type: "amount",
-  },
-];
-const expenseFields: FieldInterface[] = [
-  {
-    id: "monthlyLivingExpenses",
-    label: "Basic Expense",
-    type: "amount",
-  },
-  {
-    id: "monthlyOtherExpenses",
-    label: "Other expenses",
-    type: "amount",
-  },
-  {
-    id: "childSupport",
-    label: "Child support",
-    type: "amount",
-  },
-  {
-    id: "monthlyRent",
-    label: "Rent",
-    type: "amount",
-  },
-];
+import { incomeFields, expenseFields } from "@/utils/interfaces/FieldInterface";
 const SingleApplicant = ({
   applicant,
   index,
 }: {
-  applicant: ApplicantInterface;
+  applicant: IApplicantInterface;
   index: number;
 }) => {
   const dispatch = useDispatch();
